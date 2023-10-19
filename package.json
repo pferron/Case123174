@@ -1,0 +1,160 @@
+{
+  "name": "OnArrivalReact",
+  "version": "16.1.0",
+  "files": [
+    "build/android/index.android.map",
+    "build/ios/index.ios.map"
+  ],
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "test": "env TZ='America/Halifax' jest",
+    "lint": "eslint {index.js,src,__tests__}",
+    "prettier": "prettier --write \"{src,__tests__,scripts}/**/*.{js,json}\"",
+    "precommit": "pretty-quick --staged",
+    "bundle:ios": "./scripts/bundle-ios.sh",
+    "upload:ios": "pod repo push --sources=ssh://git@stash.cvent.net:7999/nuke/podspecs.git,https://github.com/CocoaPods/Specs.git nucleus ./OAReact.podspec --allow-warnings --use-libraries",
+    "bundle:android": "./scripts/bundle-android.sh",
+    "upload:android": "./scripts/upload-android.sh",
+    "trace-source-map:android": "node scripts/trace-source-map ./android/oareact/src/main/assets/index.android.map",
+    "bundle": "npm run bundle:ios && npm run bundle:android",
+    "translations": "phraseapp push && phraseapp pull",
+    "upload:react": "node scripts/maven-upload-react-native.js",
+    "verify": "npm run lint && flow check && npm test",
+    "sonar": "npm run test -- --coverage && create-sonar-props && sonar-scanner",
+    "docs:bridge": "./node_modules/.bin/documentation readme src/settings/bridge/*.js --readme-file=docs/BridgeAPI.md --section=\"Bridge API\" --shallow",
+    "docs:facade-schema": "node ./scripts/generate-schema.js",
+    "docs:schema": "./node_modules/.bin/documentation readme src/settings/SettingsSchema.js --readme-file=docs/ClientSettings.md --section=\"Client Settings Schema\" --shallow",
+    "docs": "npm run docs:bridge && npm run docs:schema && npm run docs:facade-schema",
+    "build": "./scripts/build.sh"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/sample/"
+    ],
+    "preset": "react-native",
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "transform": {
+      ".+\\.(png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ]
+  },
+  "dependencies": {
+    "@cvent/carina-button": "2.2.18",
+    "@cvent/carina-icon": "2.0.34",
+    "@cvent/carina-layout": "2.7.0",
+    "@cvent/carina-theme-provider": "2.1.10",
+    "@cvent/carina-tokens": "2.1.6",
+    "@cvent/nucleus-layout": "1.6.0",
+    "@cvent/nucleus-networking": "^3.0.11",
+    "@emotion/core": "^10.0.10",
+    "@formatjs/intl-utils": "^3.8.4",
+    "@react-native-community/async-storage": "1.12.1",
+    "@react-native-community/masked-view": "0.1.11",
+    "@react-native-community/netinfo": "6.0.0",
+    "@react-native-community/slider": "3.0.3",
+    "@react-native-segmented-control/segmented-control": "2.3.0",
+    "@react-navigation/material-top-tabs": "5.2.14",
+    "@react-navigation/native": "5.7.0",
+    "@react-navigation/stack": "5.7.0",
+    "@sindresorhus/string-hash": "^1.0.0",
+    "d3-scale": "^3.2.3",
+    "d3-shape": "^2.0.0",
+    "deepmerge": "^4.2.2",
+    "dot-prop": "^4.2.0",
+    "elasticlunr": "^0.9.5",
+    "jsc-android": "245459.0.0",
+    "lodash.throttle": "^4.1.1",
+    "p-retry": "^2.0.0",
+    "react": "16.13.1",
+    "react-content-loader": "^6.0.3",
+    "react-intl": "^6.2.5",
+    "react-native": "0.63.5",
+    "react-native-dots-pagination": "^0.1.9",
+    "react-native-fs": "2.18.0",
+    "react-native-gesture-handler": "1.10.3",
+    "react-native-image-picker": "4.10.0",
+    "react-native-popover-view": "^3.1.1",
+    "react-native-reanimated": "1.13.3",
+    "react-native-safe-area-context": "3.3.0",
+    "react-native-screens": "2.10.1",
+    "react-native-share": "7.4.0",
+    "react-native-sortable-list": "cvent/react-native-sortable-list",
+    "react-native-svg": "11.0.1",
+    "react-native-svg-charts": "cvent/react-native-svg-charts#49a570e",
+    "react-native-tab-view": "2.15.0",
+    "react-native-view-shot": "3.1.2",
+    "react-redux": "^7.1.1",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.3.2",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^4.0.0",
+    "url": "^0.11.0",
+    "url-parse-lax": "^3.0.0",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.0",
+    "@cvent/nucleus-eslint": "^3.2",
+    "@cvent/nucleus-logging": "^1.0.10",
+    "@cvent/nucleus-test-automation": "^2.0.1",
+    "@react-native-community/eslint-config": "^3.0.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^25.1.0",
+    "babel-preset-react-native": "4.0.0",
+    "consolemock": "^1.0.4",
+    "cvent-badge-parse": "~1.5.0",
+    "cvent-create-sonar-props": "^1.4.1",
+    "del": "^4.1.0",
+    "documentation": "^13.2.5",
+    "eslint": "^7.32.0",
+    "eslint-config-nucleus": "^7.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-react-native": "^0.2.0",
+    "eslint-plugin-dependencies": "^2.4.0",
+    "eslint-plugin-flowtype": "^5.9.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "execa": "^0.8.0",
+    "flow-bin": "0.122.0",
+    "husky": "^0.14.3",
+    "jest": "^25.1.0",
+    "jest-transform-stub": "^1.0.0",
+    "jetifier": "^1.6.4",
+    "json-schema-deref": "^0.5.0",
+    "json-schema-to-markdown": "^1.1.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "node-fetch": "^2.3.0",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1",
+    "react-test-renderer": "16.13.1",
+    "redux-mock-store": "^1.5.1",
+    "simple-git": "^1.110.0",
+    "sonar-scanner": "^3.1.0",
+    "source-map": "^0.6.1"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.core.cvent.org:8081/nexus/content/repositories/npm-local/"
+  },
+  "sonar": {
+    "sources": [
+      "src"
+    ]
+  },
+  "sourceMaps": {
+    "android": "build/android/index.android.map",
+    "ios": "build/ios/index.ios.map"
+  }
+}
