@@ -111,7 +111,7 @@
     "@react-native-community/eslint-config": "^3.0.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^25.1.0",
-    "babel-preset-react-native": "4.0.0",
+    "babel-preset-react-native": "4.0.1",
     "consolemock": "^1.0.4",
     "cvent-badge-parse": "~1.5.0",
     "cvent-create-sonar-props": "^1.4.1",
