@@ -63,7 +63,7 @@
     "@react-native-community/slider": "3.0.3",
     "@react-native-segmented-control/segmented-control": "2.3.0",
     "@react-navigation/material-top-tabs": "5.2.14",
-    "@react-navigation/native": "5.7.0",
+    "@react-navigation/native": "5.9.8",
     "@react-navigation/stack": "5.7.0",
     "@sindresorhus/string-hash": "^1.0.0",
     "d3-scale": "^3.2.3",
