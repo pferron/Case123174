@@ -128,7 +128,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "execa": "^0.8.0",
-    "flow-bin": "0.122.0",
+    "flow-bin": "0.232.0",
     "husky": "^0.14.3",
     "jest": "^25.1.0",
     "jest-transform-stub": "^1.0.0",
